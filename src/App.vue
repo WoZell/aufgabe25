@@ -15,6 +15,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "assets/typo.css";
   .main_container {
     background-color: #fafafa;
     display: grid;
