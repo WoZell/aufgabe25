@@ -50,22 +50,40 @@ export default defineComponent({
     }
     .progress {
       background-color: $blue;
-      inset: -30px -30px 50% 50%;
+      inset: 0 0 50% 50%;
       position: absolute;
+      &::before, &::after {
+        background-color: $blue;
+        border-radius: 100%;
+        content: "";
+        height: 30px;
+        position: absolute;
+        width: 30px;
+      }
+      &:before {
+        left: 0;
+        top: 0;
+        transform: translateX(-40%);
+      }
+      &::after {
+        right: 0;
+        bottom: 0;
+        transform: translatey(40%);
+      }
     }
     .inner {
       background-color: white;
       border-radius: 100%;
-      position: absolute;
       inset: 30px;
+      position: absolute;
     }
   }
   .loading_label {
     color: #333333;
-    display: grid;
     font-family: "Fira", "Times New Roman", sans-serif;
-    inset: 0;
-    place-content: center;
+    left: 50%;
     position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>
