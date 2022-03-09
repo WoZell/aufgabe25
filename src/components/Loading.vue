@@ -27,11 +27,15 @@ export default defineComponent({
     background-color: white;
     border: 1px solid #efefef;
     height: 30rem;
+    position: relative;
     width: 30rem;
   }
   .loading_label {
-    font-family: "Fira", "Times New Roman", sans-serif;
     color: #333333;
-    letter-spacing: 0px;
+    font-family: "Fira", "Times New Roman", sans-serif;
+    inset: 0;
+    position: absolute;
+    display: grid;
+    place-content: center;
   }
 </style>
