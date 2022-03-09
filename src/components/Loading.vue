@@ -23,6 +23,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+  @import "src/assets/variables";
   .loading_wrapper {
     background-color: white;
     border: 1px solid #efefef;

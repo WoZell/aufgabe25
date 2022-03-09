@@ -16,6 +16,7 @@ export default {
 
 <style lang="scss">
   @import "assets/typo.css";
+  @import "assets/reset";
   .main_container {
     background-color: #fafafa;
     display: grid;
