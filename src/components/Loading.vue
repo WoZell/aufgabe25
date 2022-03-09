@@ -1,6 +1,10 @@
 <template>
   <div class="loading_wrapper">
-    <div class="background_ring"></div>
+    <div class="ring_wrapper">
+      <div class="background_ring"></div>
+      <div class="progress"></div>
+      <div class="inner"></div>
+    </div>
     <div class="loading_label">{{ progressPercentage }}%</div>
   </div>
 </template>
@@ -34,11 +38,27 @@ export default defineComponent({
     position: relative;
     width: 30rem;
   }
-  .background_ring {
-    border: 30px solid $gray;
+  .ring_wrapper {
     border-radius: 100%;
-    height: 10rem;
-    width: 10rem;
+    overflow: hidden;
+    position: relative;
+    .background_ring {
+      border: 30px solid $gray;
+      border-radius: 100%;
+      height: 10rem;
+      width: 10rem;
+    }
+    .progress {
+      background-color: $blue;
+      inset: -30px -30px 50% 50%;
+      position: absolute;
+    }
+    .inner {
+      background-color: white;
+      border-radius: 100%;
+      position: absolute;
+      inset: 30px;
+    }
   }
   .loading_label {
     color: #333333;
