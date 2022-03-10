@@ -1,11 +1,10 @@
 <template>
   <div class="loading_wrapper">
     <div class="ring_wrapper">
-      <div class="background_ring"></div>
-      <div class="progress"></div>
-      <div class="inner"></div>
+      <div :class="`progress${progressPercentage}`" class="progress"></div>
+      <div v-if="progressPercentage === 75" class="progress_helper"></div>
+      <div class="inner">{{ progressPercentage }}%</div>
     </div>
-    <div class="loading_label">{{ progressPercentage }}%</div>
   </div>
 </template>
 
@@ -20,10 +19,9 @@ export default defineComponent({
   computed: {
     progressPercentage() {
       const progressNumber = typeof this.progress === "string" ? parseFloat(this.progress) : this.progress;
-      if (progressNumber > 100) return progressNumber;
-      else return progressNumber * 100;
-    }
-  }
+      return Math.round(progressNumber / 25) * 25;
+    },
+  },
 });
 </script>
 
@@ -39,18 +37,14 @@ export default defineComponent({
     width: 30rem;
   }
   .ring_wrapper {
+    background-color: $gray;
     border-radius: 100%;
+    height: 10rem;
     overflow: hidden;
     position: relative;
-    .background_ring {
-      border: 30px solid $gray;
-      border-radius: 100%;
-      height: 10rem;
-      width: 10rem;
-    }
+    width: 10rem;
     .progress {
       background-color: $blue;
-      inset: 0 0 50% 50%;
       position: absolute;
       &::before, &::after {
         background-color: $blue;
@@ -60,30 +54,53 @@ export default defineComponent({
         position: absolute;
         width: 30px;
       }
-      &:before {
+      &::before {
         left: 0;
         top: 0;
         transform: translateX(-40%);
       }
       &::after {
-        right: 0;
         bottom: 0;
+        right: 0;
         transform: translatey(40%);
       }
     }
+    .progress_helper {
+      background-color: $blue;
+      inset: 50% 50% 0 0;
+      position: absolute;
+      &::after {
+        background-color: $blue;
+        border-radius: 100%;
+        bottom: 100%;
+        content: "";
+        height: 30px;
+        left: 0;
+        position: absolute;
+        transform: translateY(40%);
+        width: 30px;
+      }
+    }
+    .progress0 { inset: 0 50% 50% 50%; }
+    .progress25 { inset: 0 0 50% 50%; }
+    .progress50, .progress75 {
+      inset: 0 0 0 50%;
+      &::after {
+        bottom: 0;
+        left: 0;
+        transform: translateX(-40%);
+      }
+    }
+    .progress100 { inset: 0 0 0 0; }
     .inner {
       background-color: white;
       border-radius: 100%;
+      color: #333333;
+      display: grid;
+      font-family: "Fira", "Times New Roman", sans-serif;
       inset: 30px;
+      place-content: center;
       position: absolute;
     }
-  }
-  .loading_label {
-    color: #333333;
-    font-family: "Fira", "Times New Roman", sans-serif;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
   }
 </style>
